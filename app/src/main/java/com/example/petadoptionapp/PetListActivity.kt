@@ -197,6 +197,19 @@ fun PetTopAppBar(title: String) {
     }
 }
 
+private val titleColor = Color(0x66, 0x00, 0xFF)
+
+private val titleStyle = TextStyle(
+    color = titleColor,
+    fontSize = 16.sp,
+    fontWeight = FontWeight.SemiBold
+)
+private val infoStyle = TextStyle(
+    color = Color(0x80, 0x80, 0x80),
+    fontSize = 14.sp,
+    fontWeight = FontWeight.Normal
+)
+
 @Composable
 fun PetDetailView(info: PetDetailInfo) {
     Box(
@@ -205,19 +218,9 @@ fun PetDetailView(info: PetDetailInfo) {
         Column {
             PetTopAppBar(title = info.breed ?: "")
             Column(modifier = Modifier.verticalScroll(ScrollState(0))) {
-                val titleStyle = TextStyle(
-                    color = Color(0x66, 0x00, 0xFF),
-                    fontSize = 16.sp,
-                    fontWeight = FontWeight.SemiBold
-                )
-                val infoStyle = TextStyle(
-                    color = Color(0x80, 0x80, 0x80),
-                    fontSize = 14.sp,
-                    fontWeight = FontWeight.Normal
-                )
 
                 Text(
-                    text = "Name/Age",
+                    text = info.petsName ?: "",
                     modifier = Modifier
                         .wrapContentWidth()
                         .wrapContentHeight()
@@ -225,7 +228,7 @@ fun PetDetailView(info: PetDetailInfo) {
                     style = titleStyle
                 )
                 Text(
-                    text = "${info.petsName}/${info.ageDescription}",
+                    text = "${info.ageDescription}",
                     modifier = Modifier
                         .wrapContentWidth()
                         .wrapContentHeight()
@@ -245,7 +248,7 @@ fun PetDetailView(info: PetDetailInfo) {
                 }
 
                 Text(
-                    text = "Owner & Address",
+                    text = "Address",
                     modifier = Modifier
                         .wrapContentWidth()
                         .wrapContentHeight()
@@ -261,12 +264,20 @@ fun PetDetailView(info: PetDetailInfo) {
                     style = infoStyle
                 )
 
+                Spacer(
+                    modifier = Modifier
+                        .padding(top = 8.dp)
+                        .fillMaxWidth()
+                        .height(1.dp)
+                        .background(color = titleColor)
+                )
+
                 Text(
                     text = "About",
                     modifier = Modifier
                         .wrapContentWidth()
                         .wrapContentHeight()
-                        .padding(start = 16.dp, top = 16.dp),
+                        .padding(start = 16.dp, top = 8.dp),
                     style = titleStyle
                 )
                 Text(
@@ -274,7 +285,7 @@ fun PetDetailView(info: PetDetailInfo) {
                     modifier = Modifier
                         .wrapContentWidth()
                         .wrapContentHeight()
-                        .padding(start = 16.dp, bottom = 32.dp, end = 16.dp),
+                        .padding(start = 16.dp, end = 16.dp),
                     style = infoStyle
                 )
                 Row {
